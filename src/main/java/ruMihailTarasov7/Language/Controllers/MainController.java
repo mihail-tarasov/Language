@@ -1,4 +1,4 @@
-package ru.mihail.tarasov7.Language.Controllers;
+package ruMihailTarasov7.Language.Controllers;
 
 
 import org.springframework.stereotype.Controller;

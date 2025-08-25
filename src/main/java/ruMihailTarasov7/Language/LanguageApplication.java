@@ -1,4 +1,4 @@
-package ru.mihail.tarasov7.Language;
+package ruMihailTarasov7.Language;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

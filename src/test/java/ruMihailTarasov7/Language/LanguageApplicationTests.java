@@ -1,4 +1,4 @@
-package ru.mihail.tarasov7.Language;
+package ruMihailTarasov7.Language;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

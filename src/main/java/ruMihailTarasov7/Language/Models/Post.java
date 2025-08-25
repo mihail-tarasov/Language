@@ -1,4 +1,4 @@
-package ru.mihail.tarasov7.Language.Models;
+package ruMihailTarasov7.Language.Models;
 
 
 import jakarta.persistence.Entity;

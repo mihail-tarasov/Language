@@ -44,4 +44,14 @@ public class Post {
     public void setFull_text(String full_text) {
         this.full_text = full_text;
     }
+
+    public Post(){
+
+    }
+
+    public Post(String word,String translation,String full_text){
+        this.word=word;
+        this.translation=translation;
+        this.full_text=full_text;
+    }
 }

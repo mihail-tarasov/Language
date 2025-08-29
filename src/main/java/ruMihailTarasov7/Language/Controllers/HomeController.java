@@ -17,4 +17,9 @@ public class HomeController {
         model.addAttribute("posts",posts);
         return "homePage";
     }
+    @GetMapping("/home/add")
+    public String homePageTitleAdd( Model model){
+        return "homePageTitleAdd";
+    }
+
 }

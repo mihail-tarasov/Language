@@ -7,9 +7,12 @@
 </head>
 <body>
     <h1>Это страничка с твоими карточками!</h1>
-    <div th : each="el : ${posts}" mt-3></div>
-        <h3 th: text="${el.word}"/>
-        <h3 th: text="${el.translation}"/>
-        <h3 th: text="${el.full_text}"/>
+    <div>
+        <div th : each="el : ${posts}" mt-3></div>
+            <h3 th: text="${el.word}"/>
+            <h3 th: text="${el.translation}"/>
+            <h3 th: text="${el.full_text}"/>
+    </div>
+    <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

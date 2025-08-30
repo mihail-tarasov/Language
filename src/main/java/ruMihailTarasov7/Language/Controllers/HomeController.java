@@ -23,9 +23,9 @@ public class HomeController {
         model.addAttribute("posts",posts);
         return "homePage";
     }
-    @GetMapping("/home/add")
-    public String homePageTitleAdd( Model model){
-        return "homePageTitleAdd";
+    @GetMapping("/blog/add")
+    public String blogAdd( Model model){
+        return "blog-add";
     }
     @PostMapping("/blog/add")
     public String blogPostAdd(@RequestParam String word, @RequestParam String translation, @RequestParam String full_text, Model model){

@@ -1,18 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <title>Домашняя страница</title>
+    <title>Это страничка с твоими карточками!</title>
 </head>
 <body>
-    <h1>Это страничка с твоими карточками!</h1>
-    <div>
-        <div th : each="el : ${posts}" mt-3></div>
-            <h3 th: text="${el.word}"/>
-            <h3 th: text="${el.translation}"/>
-            <h3 th: text="${el.full_text}"/>
-    </div>
-    <footer th:insert="blocks/footer :: footer"></footer>
+<div id="header-container"></div>
+<script>
+    // Загружаем футер
+    fetch('/templates/blocks/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+</script>
+
+<h3>Собери свои карточки .</h3>
+<div id="footer-container"></div>
+
+<script>
+    // Загружаем футер
+    fetch('/templates/blocks/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+        });
+</script>
 </body>
 </html>

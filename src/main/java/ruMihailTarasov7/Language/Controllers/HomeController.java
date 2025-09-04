@@ -23,17 +23,17 @@ public class HomeController {
         model.addAttribute("posts",posts);
         return "homePage";
     }
-    @GetMapping("/blog/add")
+    @GetMapping("/home/blog/add")
     public String blogAdd( Model model){
         return "blog-add";
     }
-    @PostMapping("/blog/add")
+    @PostMapping("/home/blog/add")
     public String blogPostAdd(@RequestParam String word, @RequestParam String translation, @RequestParam String full_text, Model model){
         Post post=new Post(word,translation,full_text);
         postRepository.save(post);
         return "blog-main";
     }
-    @GetMapping("/blog/{id}")
+    @GetMapping("/home/blog/{id}")
     public String blogDetails(@PathVariable(value="id")long id, Model model){
         if(!postRepository.existsById(id)){
             return "blog-main";
@@ -44,10 +44,10 @@ public class HomeController {
         model.addAttribute("post",res);
         return "blog-details";
     }
-    @GetMapping("/blog/{id}/edit")
+    @GetMapping("/home/blog/{id}/edit")
     public String blogEdit(@PathVariable(value="id")long id,Model model){
         if(!postRepository.existsById(id)){
-            return "/blog-main";
+            return "blog-main";
         }
         Optional<Post>post=postRepository.findById(id);
         ArrayList<Post> res=new ArrayList<>();
@@ -55,7 +55,7 @@ public class HomeController {
         model.addAttribute("post",res);
         return "blog-edit";
     }
-    @PostMapping("/blog/{id}/edit")
+    @PostMapping("/home/blog/{id}/edit")
     public String blogPostUpdate(@PathVariable(value="id")long id,@RequestParam String word,@RequestParam String translation,@RequestParam String full_text, Model model){
         Post post=postRepository.findById(id).orElseThrow();
         post.setWord(word);
@@ -64,7 +64,7 @@ public class HomeController {
         postRepository.save(post);
         return "blog-main";
     }
-    @PostMapping("/blog/{id}/remove")
+    @PostMapping("/home/blog/{id}/remove")
     public String blogPostDelete(@PathVariable(value="id")long id, Model model){
         Post post=postRepository.findById(id).orElseThrow();
         postRepository.delete(post);

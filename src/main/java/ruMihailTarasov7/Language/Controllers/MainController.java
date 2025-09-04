@@ -1,4 +1,4 @@
-package ru.mihail.tarasov7.Language.Controllers;
+package ruMihailTarasov7.Language.Controllers;
 
 
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
     @GetMapping("/")
     public String firstPage(Model model){
-        model.addAttribute("title","Главная страница");
+        model.addAttribute("title","Добро пожаловать");
         return "firstPage";
     }
 }

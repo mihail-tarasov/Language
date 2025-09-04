@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <title>Твои карточки</title>
+=======
+    <title>Это страничка с твоими карточками!</title>
+>>>>>>> 2f982be0e844f0f88e81853a9e801357bcd4150b
 </head>
 <body>
+<div id="header-container"></div>
+<script>
+    // Загружаем футер
+    fetch('/templates/blocks/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+</script>
 
+<h3>Собери свои карточки .</h3>
+<div id="footer-container"></div>
+
+<script>
+    // Загружаем футер
+    fetch('/templates/blocks/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+        });
+</script>
 </body>
 </html>

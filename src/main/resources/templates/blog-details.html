@@ -6,7 +6,9 @@
 
 </head>
 <body>
+<!--
 <header th:insert="blocks/header :: header"></header>
+-->
 <div class="container mt-5">
     <h1>Блог сайта </h1>
     <biv th:each="el : ${post}" class="alert alert-info mt-2">
@@ -15,7 +17,7 @@
 
 
         <a th:href="'/home/' + ${el.id}">Редактирование</a>
-        <form th:action="'/blog/' + ${el.id} +'/remove'" method="post">
+        <form th:action="'/home/blog/' + ${el.id} +'/remove'" method="post">
             <button class="btn btn-warning" type="submit">Удалить</button>
         </form>
     </biv>

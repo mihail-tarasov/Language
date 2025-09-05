@@ -10,7 +10,7 @@
 <div class="container mt-5" mb-5>
     <h1>Редактирование статьи </h1>
     <div th:each="el : ${post}">
-        <form action="/home/add" method="post" >
+        <form action="/home/blog/add" method="post" >
             <input type="text" th:value="${el.word}" name="word" placeholder="Введите слова" class="form-control"><br>
             <input type="text" th:value="${el.translation}" name="translation" placeholder="Введите слова с переводом" class="form-control" th:text="${el.full_text}"><br>
             <textarea  name="full_text" placeholder="Введите текст со словами" class="form-control" ></textarea><br>

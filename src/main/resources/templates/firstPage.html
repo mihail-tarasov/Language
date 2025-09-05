@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Главная страница</title>
 </head>
 <body>
     <div id="header-container"></div>
     <script>
         // Загружаем футер
-        fetch('E:/Проекты/Language/Language/src/main/resources/templates/blocks/header.html')
+        fetch('E:/Проекты/Language/Language/src/main/resources/static/blocks/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-container').innerHTML = data;
@@ -16,11 +16,10 @@
     </script>
 
     <h3>Добро пожаловать!</h3>
-    <div id="footer-container"></div>
 
     <script>
         // Загружаем футер
-        fetch('blocks/footer.html')
+        fetch('/blocks/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-container').innerHTML = data;

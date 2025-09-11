@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<!--
+
 <html xmlns:th="http://www.thymeleaf.org">
--->
+
 <head>
+    <header th:insert="blocks/header2 :: header2"></header>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Главная страница</title>
 </head>
 <body>
-    <div id="header-container"></div>
+<!--
+<div id="header-container"></div>
     <script>
         // Загружаем футер
         fetch('E:/Проекты/Language/Language/src/main/resources/static/blocks/header.html')
@@ -16,8 +18,10 @@
                 document.getElementById('header-container').innerHTML = data;
             });
     </script>
+    -->
 
     <h3>Добро пожаловать!</h3>
+<!--
     <div id="footer-container"></div>
     <script>
         // Загружаем футер
@@ -27,5 +31,7 @@
                 document.getElementById('footer-container').innerHTML = data;
             });
     </script>
+-->
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

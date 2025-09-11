@@ -21,7 +21,7 @@ public class HomeController {
     public String homePage(Model model){
         Iterable<Post> posts= postRepository.findAll();
         model.addAttribute("posts",posts);
-        return "homePage";
+        return "homePage2";
     }
     @GetMapping("/home/blog/add")
     public String blogAdd( Model model){
@@ -32,12 +32,12 @@ public class HomeController {
     public String blogPostAdd(@RequestParam String word, @RequestParam String translation, @RequestParam String full_text, Model model){
         Post post=new Post(word,translation,full_text);
         postRepository.save(post);
-        return "homePage";
+        return "homePage2";
     }
     @GetMapping("/home/blog/{id}")
     public String blogDetails(@PathVariable(value="id")long id, Model model){
         if(!postRepository.existsById(id)){
-            return "homePage";
+            return "homePage2";
         }
         Optional<Post> post=postRepository.findById(id);
         ArrayList<Post> res=new ArrayList<>();
@@ -48,7 +48,7 @@ public class HomeController {
     @GetMapping("/home/blog/{id}/edit")
     public String blogEdit(@PathVariable(value="id")long id,Model model){
         if(!postRepository.existsById(id)){
-            return "homePage";
+            return "homePage2";
         }
         Optional<Post>post=postRepository.findById(id);
         ArrayList<Post> res=new ArrayList<>();
@@ -63,13 +63,13 @@ public class HomeController {
         post.setTranslation(translation);
         post.setFull_text(full_text);
         postRepository.save(post);
-        return "homePage";
+        return "homePage2";
     }
     @PostMapping("/home/blog/{id}/remove")
     public String blogPostDelete(@PathVariable(value="id")long id, Model model){
         Post post=postRepository.findById(id).orElseThrow();
         postRepository.delete(post);
-        return "homePage";
+        return "homePage2";
     }
 }
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ru">
+<head>
+    <header2 th:insert="blocks/header2 :: header2"></header2>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пустая карточка</title>
+    <link href=style2.css rel="stylesheet" >
+
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            width: 300px;
+            min-height: 200px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            box-sizing: border-box;
+        }
+    </style>
+
+</head>
+<body>
+<h3>Блог сайта </h3>
+<div class="card">
+    <div class="container mt-5">
+        <h3>Блог сайта </h3>
+        <biv th:each="el : ${posts}" class="alert alert-info mt-2">
+            <h3 th:text="${el.word}"></h3>
+            <p th:text="${el.translation}"></p>
+            <a th:href="'/home/blog/' + ${el.id}">Детальнее</a>
+        </biv>
+    </div>
+    <button class="btn btn-warning" type="submit">Удалить</button>
+    <!-- Внутрь этой div можно добавлять любые кнопки и текст -->
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

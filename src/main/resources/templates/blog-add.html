@@ -1,38 +1,21 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Пустая карточка</title>
-    <link rel="stylesheet" href="styleCSS/style2.css">
-    <!--
-    <style>
-        body {
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
+    <title> Блог сайта </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        .card {
-            width: 300px;
-            min-height: 200px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 24px;
-            box-sizing: border-box;
-        }
-    </style>
--->
 </head>
 <body>
-<div class="card">
-    <button class="btn btn-warning" type="submit">Удалить</button>
-    <!-- Внутрь этой div можно добавлять любые кнопки и текст -->
+<header2 th:insert="bloks/header2 :: header2"></header2>
+<div class="container mt-5" mb-5>
+    <h1>Добавление статьи </h1>
+    <form action="/blog/add" method="post" >
+        <input type="text" name="word" placeholder="Введите слова" ><br>
+        <input type="text" name="translation" placeholder="Введите слова с переводом" class="form-control"><br>
+        <textarea name="fullText" placeholder="Введите текст" class="form-control"></textarea><br>
+        <button type="submit" class="btn btn-success">Добавить статью</button><br>
+    </form>
 </div>
+<footer th:insert="bloks/footer :: footer"></footer>
 </body>
 </html>

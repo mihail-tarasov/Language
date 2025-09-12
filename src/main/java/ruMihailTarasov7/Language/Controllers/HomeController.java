@@ -26,19 +26,17 @@ public class HomeController {
     @GetMapping("/home/blog/add")
     public String blogAdd( Model model){
 
-        return "blog-add";
+       return "blog-add";
     }
     @PostMapping("/home/blog/add")
     public String blogPostAdd(@RequestParam String word, @RequestParam String translation, @RequestParam String full_text, Model model){
         Post post=new Post(word,translation,full_text);
         postRepository.save(post);
-        return "homePage2";
+        return "cardAdd";
     }
     @GetMapping("/home/blog/{id}")
     public String blogDetails(@PathVariable(value="id")long id, Model model){
-        if(!postRepository.existsById(id)){
-            return "homePage2";
-        }
+
         Optional<Post> post=postRepository.findById(id);
         ArrayList<Post> res=new ArrayList<>();
         post.ifPresent(res :: add);
@@ -69,7 +67,7 @@ public class HomeController {
     public String blogPostDelete(@PathVariable(value="id")long id, Model model){
         Post post=postRepository.findById(id).orElseThrow();
         postRepository.delete(post);
-        return "homePage2";
+        return "cardRemoved";
     }
 }
 

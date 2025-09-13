@@ -32,7 +32,7 @@ public class HomeController {
     public String blogPostAdd(@RequestParam String word, @RequestParam String translation, @RequestParam String full_text, Model model){
         Post post=new Post(word,translation,full_text);
         postRepository.save(post);
-        return "cardAdd";
+        return "redirect:/home";
     }
     @GetMapping("/home/blog/{id}")
     public String blogDetails(@PathVariable(value="id")long id, Model model){
@@ -67,7 +67,7 @@ public class HomeController {
     public String blogPostDelete(@PathVariable(value="id")long id, Model model){
         Post post=postRepository.findById(id).orElseThrow();
         postRepository.delete(post);
-        return "cardRemoved";
+        return "redirect:/home";
     }
 }
 

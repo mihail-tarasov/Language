@@ -10,7 +10,7 @@
 
 <div class="container mt-5" mb-5>
     <h1>Добавление статьи </h1>
-    <form action="home/blog/add" method="post" >
+    <form action="/home/blog/add" method="post" >
         <div>
              <input type="text" name="word" placeholder="Введите слова" ><br>
         </div>
@@ -18,7 +18,7 @@
             <input type="text" name="translation" placeholder="Введите слова с переводом" class="form-control"><br>
         </div>
         <div>
-            <textarea name="fullText" placeholder="Введите текст" class="form-control"></textarea><br>
+            <textarea name="full_text" placeholder="Введите текст" class="form-control"></textarea><br>
         </div>
         <button type="submit" class="btn btn-success">Добавить статью</button><br>
     </form>

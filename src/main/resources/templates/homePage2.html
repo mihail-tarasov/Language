@@ -5,8 +5,8 @@
     <header th:insert="blocks/header :: header"></header>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href=styleCard.css rel="stylesheet" >
+    <title>Домашняя странца</title>
+    <link th:href="@{/CSS/styleCard.css}" rel="stylesheet">
 
 
 
@@ -16,10 +16,10 @@
 <div class="card">
     <div class="container mt-5">
         <h3>Блог сайта </h3>
-        <biv th:each="el : ${posts}" class="alert alert-info mt-2">
-            <h3 th:text="${el.word}"></h3>
+        <biv th:each="el:${posts}" class="alert alert-info mt-2">
+            <p th:text="${el.word}"></p>
             <p th:text="${el.translation}"></p>
-            <a th:href="'/home/blog/' + ${el.id}">Детальнее</a>
+            <a th:href="'/home/blog/'+${el.id}" class="btn btn-warning">Детальнее</a>
         </biv>
     </div>
 

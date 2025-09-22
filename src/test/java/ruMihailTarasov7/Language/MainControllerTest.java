@@ -7,6 +7,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import ruMihailTarasov7.Language.Controllers.MainController;
 
+
 import static
         org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -19,13 +20,12 @@ public class MainControllerTest {
     private MockMvc mockMvc;
     @Test
 
-    public void firstPageTest() throws Exception{
-       mockMvc.perform(get("/"))
-               .andExpect(status().isOk())
-               .andExpect(view().name("firstPage"))
-               .andExpect(content().string(containsString("Главная страница")));
+    public void firstPageTest() throws Exception {
+        mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("firstPage"))
+                .andExpect(content().string(containsString("Главная страница")));
 
     }
-
 }
 

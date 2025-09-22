@@ -12,8 +12,8 @@
     <div th:each="el : ${post}">
         <form action="/home/blog/add" method="post" >
             <input type="text" th:value="${el.word}" name="word" placeholder="Введите слова" class="form-control"><br>
-            <input type="text" th:value="${el.translation}" name="translation" placeholder="Введите слова с переводом" class="form-control" th:text="${el.full_text}"><br>
-            <textarea  name="full_text" placeholder="Введите текст со словами" class="form-control" ></textarea><br>
+            <input type="text" th:value="${el.translation}" name="translation" placeholder="Введите слова с переводом" class="form-control" ><br>
+            <textarea th:text="${el.full_text}" name="full_text" placeholder="Введите текст со словами" class="form-control" ></textarea><br>
             <button type="submit" class="btn btn-success">Обновить карточку </button><br>
 
         </form>

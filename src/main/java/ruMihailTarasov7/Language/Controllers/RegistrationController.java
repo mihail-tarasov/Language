@@ -19,11 +19,11 @@ public class RegistrationController {
     }
     @GetMapping
     public String registerForm() {
-        return "registration";
+        return "login";
     }
     @PostMapping
     public String processRegistration(RegistrationForm form) {
         userRepository.save(form.toUser(passwordEncoder));
-        return "redirect:/login";
+        return "redirect:/home";
     }
 }

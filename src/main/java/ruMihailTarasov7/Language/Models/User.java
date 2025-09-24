@@ -1,9 +1,6 @@
 package ruMihailTarasov7.Language.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @Entity
+@Table(name = "security_users" , schema = "language")
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
 @RequiredArgsConstructor
@@ -26,8 +24,11 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long id;
 
+    @Column(unique = true,nullable = false)
     private  final String username;
+    @Column(nullable = false)
     private  final String password;
+    private String role="USER";
 
 
 

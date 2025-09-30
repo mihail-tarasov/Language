@@ -1,5 +1,6 @@
 package ruMihailTarasov7.Language.Security;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -22,13 +23,32 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/home", "/home/**").hasRole("USER")
+                        .requestMatchers("/", "/css/**", "/js/**", "/login", "/register").permitAll()
+                        .anyRequest().authenticated()  // всё остальное требует авторизации
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")          // отдельная страница логина
+                        .defaultSuccessUrl("/home")
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/")
+                )
+                .build();
+    }
+
+    /*
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/home", "/home/**").hasRole("USER")
                         .requestMatchers("/", "/**").permitAll()
                 )
                 .formLogin(Customizer.withDefaults()) // стандартная форма логина
                 .build();
     }
-    //@Bean
-    /*public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/home", "/home/**").hasRole("USER")
@@ -53,4 +73,5 @@ public class SecurityConfig {
             throw new UsernameNotFoundException("User '"+username+"' not found");
         };
     }
+
 }

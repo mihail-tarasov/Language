@@ -1,24 +1,77 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Шпоры</title>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <style>
+    .container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .btn {
+        padding: 10px 20px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .error {
+        color: red;
+        margin-bottom: 15px;
+    }
+    .success {
+        color: green;
+        margin-bottom: 15px;
+    }
+  </style>
 </head>
 <body>
-<h1>Вход</h1>
+<div class="container">
+  <h2>Вход в систему</h2>
 
-<div th:if="${error}">
-  Unable to login. Check your username and password.
+  <div th:if="${param.error}" class="error">
+    Неверное имя пользователя или пароль
+  </div>
+
+  <div th:if="${param.registered}" class="success">
+    Регистрация успешна! Теперь вы можете войти.
+  </div>
+
+  <form th:action="@{/login}" method="post">
+    <div class="form-group">
+      <label for="username">Имя пользователя:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Пароль:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+
+    <button type="submit" class="btn">Войти</button>
+  </form>
+
+  <p style="margin-top: 20px;">
+    Нет аккаунта? <a th:href="@{/register}">Зарегистрируйтесь здесь</a>
+  </p>
 </div>
-<p>New here? Click
-  <a th:href="@{/register}">here</a> to register.</p>
-<form method="POST" th:action="@{/login}" id="loginForm">
-  <label for="username">Username: </label>
-
-  <input type="text" name="username" id="username" /><br/>
-  <label for="password">Password: </label>
-  <input type="password" name="password" id="password" /><br/>
-  <input type="submit" value="Ввести"/>
-</form>
 </body>
 </html>

@@ -15,7 +15,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "security_users" , schema = "language")
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
 @RequiredArgsConstructor
 public class User implements UserDetails {
     private static final long serialVersionUID=1L;
@@ -25,16 +25,32 @@ public class User implements UserDetails {
     private  Long id;
 
     @Column(unique = true,nullable = false)
-    private  final String username;
+    private  String username;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setPassword(String password) {
+        // Валидация, логирование и т.д.
+        if (password == null || password.length() < 6) {
+            throw new IllegalArgumentException("Password too short");
+        }
+        this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Column(nullable = false)
-    private  final String password;
+    private   String password;
+
     private String role="USER";
-
-
-
-    // public User(String username, String password) {
-      //  this.username = username;
-        //this.password = password;}
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){

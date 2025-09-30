@@ -13,10 +13,10 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @Entity
-@Table(name = "security_users" , schema = "language")
+@Table(name = "security_users" )
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+
 public class User implements UserDetails {
     private static final long serialVersionUID=1L;
 

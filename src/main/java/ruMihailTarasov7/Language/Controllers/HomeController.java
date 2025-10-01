@@ -69,6 +69,7 @@ public class HomeController {
         postRepository.delete(post);
         return "redirect:/home";
     }
+
 }
 
 

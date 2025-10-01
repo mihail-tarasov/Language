@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -10,9 +11,9 @@
 
 <div class="container mt-5" mb-5>
     <h1>Добавление статьи </h1>
-    <form action="/home/blog/add" method="post" >
+    <form method="post" th:action="@{/home/blog/add}" th:object="${post}">
         <div>
-             <input type="text" name="word" placeholder="Введите слова" ><br>
+            <input type="text" name="word" placeholder="Введите слова" ><br>
         </div>
         <div>
             <input type="text" name="translation" placeholder="Введите слова с переводом" class="form-control"><br>

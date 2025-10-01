@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import ruMihailTarasov7.Language.Models.User;
 import ruMihailTarasov7.Language.Repository.UserRepository;
 
@@ -22,10 +23,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/home", "/home/**").hasRole("USER")
                         .requestMatchers("/", "/css/**", "/js/**", "/login", "/register").permitAll()
+                        .requestMatchers("/home", "/home/**").hasRole("USER")
                         .anyRequest().authenticated()  // всё остальное требует авторизации
                 )
+                //.csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .formLogin(form -> form
                         .loginPage("/login")          // отдельная страница логина
                         .defaultSuccessUrl("/home")
@@ -36,35 +39,7 @@ public class SecurityConfig {
                 .build();
     }
 
-    /*
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/home", "/home/**").hasRole("USER")
-                        .requestMatchers("/", "/**").permitAll()
-                )
-                .formLogin(Customizer.withDefaults()) // стандартная форма логина
-                .build();
-    }
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/home", "/home/**").hasRole("USER")
-                        .requestMatchers("/", "/**").permitAll()
-                )
-                .formLogin(form -> form
-                        .loginPage("/register")
-                        .defaultSuccessUrl("/home")
-                )
-                .logout(logout -> logout
-                        .logoutSuccessUrl("/")
-                )
-                .build();
-    }
 
-     */
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository){
         return username -> {

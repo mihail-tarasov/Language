@@ -1,86 +1,46 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <header th:insert="blocks/header2 :: header2"></header>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Главная страница</title>
+    <style>
+        .auth-buttons {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .btn-login {
+            background: #007bff;
+            color: white;
+        }
+        .btn-register {
+            background: #28a745;
+            color: white;
+        }
+        .btn-logout {
+            background: #dc3545;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-<style>
-    .auth-buttons {
-        margin: 20px 0;
-        text-align: center;
-    }
-    .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        margin: 0 10px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-    .btn-login {
-        background: #007bff;
-        color: white;
-    }
-    .btn-register {
-        background: #28a745;
-        color: white;
-    }
-    .btn-logout {
-        background: #dc3545;
-        color: white;
-    }
-</style>
 
-
-
-
-
-
-    <div class="auth-buttons">
-        <!-- Показываем кнопки Войти/Зарегистрироваться для неавторизованных -->
-        <div th:if="${#authorization.expression('!isAuthenticated()')}">
-            <a th:href="@{/login}" class="btn btn-login">Войти в систему</a>
-            <a th:href="@{/register}" class="btn btn-register">Зарегистрироваться</a>
-        </div>
-
-        <!-- Показываем приветствие и кнопку Выйти для авторизованных -->
-        <div th:if="${#authorization.expression('isAuthenticated()')}">
-
-            <a th:href="@{/design}" class="btn btn-login">Go to App</a>
-            <form th:action="@{/logout}" method="post" style="display: inline;">
-                <button type="submit" class="btn btn-logout">Выйти</button>
-            </form>
-        </div>
+<div class="auth-buttons">
+    <!-- ПРОСТОЙ ВАРИАНТ - убрать сложные проверки -->
+    <div>
+        <a th:href="@{/login}" class="btn btn-login">Войти в систему</a>
+        <a th:href="@{/register}" class="btn btn-register">Зарегистрироваться</a>
     </div>
+</div>
 
-<!--
-<div id="header-container"></div>
-    <script>
-        // Загружаем футер
-        fetch('E:/Проекты/Language/Language/src/main/resources/static/blocks/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-container').innerHTML = data;
-            });
-    </script>
-    -->
+<h3>Добро пожаловать!</h3>
 
-    <h3>Добро пожаловать!</h3>
-<!--
-    <div id="footer-container"></div>
-    <script>
-        // Загружаем футер
-        fetch('/blocks/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            });
-    </script>
--->
-<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

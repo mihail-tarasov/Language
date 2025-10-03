@@ -25,6 +25,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/css/**", "/js/**", "/login", "/register").permitAll()
                         .requestMatchers("/home", "/home/**").hasRole("USER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN") // 👈 ТОЛЬКО ADMIN
                         .anyRequest().authenticated()  // всё остальное требует авторизации
                 )
                 //.csrf(csrf -> csrf.disable())

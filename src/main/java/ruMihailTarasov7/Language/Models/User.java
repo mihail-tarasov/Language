@@ -57,6 +57,18 @@ public class User implements UserDetails {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
+    private boolean enabled = true; // 👈 по умолчанию активен
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    // + сеттер
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String getPassword() {
         return this.password;

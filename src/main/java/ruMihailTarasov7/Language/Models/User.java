@@ -9,8 +9,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "security_users" )
@@ -19,6 +21,8 @@ import java.util.Collection;
 
 public class User implements UserDetails {
     private static final long serialVersionUID=1L;
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -92,9 +96,14 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired(){
         return true;
     }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
 
-    @Override
-    public boolean isEnabled(){
-        return true;
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

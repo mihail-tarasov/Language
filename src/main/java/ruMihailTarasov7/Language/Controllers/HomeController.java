@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ruMihailTarasov7.Language.Models.Post;
+import ruMihailTarasov7.Language.Models.User;
 import ruMihailTarasov7.Language.Repository.PostRepository;
+import ruMihailTarasov7.Language.Repository.UserRepository;
+import org.springframework.security.core.Authentication;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -16,11 +19,22 @@ import java.util.Optional;
 @Controller
 public class HomeController {
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private PostRepository postRepository;
+
+    //@GetMapping("/home")
+    //public String homePage(Model model){
+    //    Iterable<Post> posts= postRepository.findAll();
+    //    model.addAttribute("posts",posts);
+    //    return "homePage2";
+    //}
     @GetMapping("/home")
-    public String homePage(Model model){
-        Iterable<Post> posts= postRepository.findAll();
-        model.addAttribute("posts",posts);
+    public String homePage(Model model, Authentication authentication) {
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username);
+        model.addAttribute("posts", postRepository.findByUser(user));
         return "homePage2";
     }
     @GetMapping("/home/blog/add")

@@ -1,5 +1,6 @@
 package ruMihailTarasov7.Language.Security;
 
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,6 +29,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("User not found: " + username);
         }
 
+        // Проверяем, не заблокирован ли пользователь
+        if (!user.isEnabled()) {
+            throw new DisabledException("User is blocked");
+        }
+
         System.out.println("✅ ПОЛЬЗОВАТЕЛЬ НАЙДЕН: " + user.getUsername());
         System.out.println("Пароль в БД: " + user.getPassword());
         System.out.println("Роль: " + user.getRole());
@@ -36,7 +42,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .roles("USER") // "USER" → "ROLE_USER"
+                .roles(user.getRole())// "USER" → "ROLE_USER"
+                .disabled(!user.isEnabled()) //Spring Security узнает о блокировке пользователя
                 .build();
     }
 }

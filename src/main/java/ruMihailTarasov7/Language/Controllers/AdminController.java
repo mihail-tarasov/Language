@@ -31,7 +31,7 @@ public class AdminController {
     @GetMapping("/user/{userId}/posts")
     public String viewUserPosts(@PathVariable Long userId, Model model) {
         User user = userRepository.findById(userId).orElseThrow();
-        model.addAttribute("posts", user.getPosts());
+        model.addAttribute("post", user.getPosts());
         model.addAttribute("viewedUser", user);
         return "admin-user-posts";
     }

@@ -19,12 +19,30 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public CommandLineRunner initAdmin(UserRepository userRepo, PasswordEncoder encoder) {
+        return args -> {
+            if (userRepo.findByUsername("admin") == null) {
+                User admin = new User();
+                admin.setUsername("admin");
+                admin.setPassword(encoder.encode("262614"));
+                admin.setRole("ADMIN");
+                userRepo.save(admin);
+                System.out.println("=== АДМИН ДЛЯ НАШЕЙ КОМАНДЫ ===");
+                System.out.println("Логин: admin");
+                System.out.println("Пароль: 262614");
+                System.out.println("Команда: Миша + Дипп = 💪");
+            }
+        };
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/css/**", "/js/**", "/login", "/register").permitAll()
-                        .requestMatchers("/home", "/home/**").hasRole("USER")
+                        .requestMatchers("/home", "/home/**").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN") // 👈 ТОЛЬКО ADMIN
                         .anyRequest().authenticated()  // всё остальное требует авторизации
                 )

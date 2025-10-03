@@ -52,4 +52,15 @@ public class Post {
         this.translation=translation;
         this.full_text=full_text;
     }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

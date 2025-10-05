@@ -106,4 +106,8 @@ public class User implements UserDetails {
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Карточки пользователя</title>
+</head>
+<body>
+<h1>Карточки пользователя: <span th:text="${viewedUser.username}"></span></h1>
+
+<div th:each="post : ${posts}" class="alert alert-info mt-2">
+  <h3 th:text="${post.word}"></h3>
+  <p th:text="${post.translation}"></p>
+  <p th:text="${post.full_text}"></p>
+</div>
+
+<a th:href="@{/admin}">← Назад к панели администратора</a>
+</body>
+</html>

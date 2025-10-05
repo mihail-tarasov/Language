@@ -8,19 +8,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ruMihailTarasov7.Language.Models.User;
+import ruMihailTarasov7.Language.Repository.PostRepository;
 import ruMihailTarasov7.Language.Repository.UserRepository;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin")
+//@RequestMapping("/home")
 public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private PostRepository postRepository;
     // Панель управления
-    @GetMapping("/dashboard")
+    @GetMapping("/admin")
     public String adminDashboard(Model model) {
         List<User> allUsers = userRepository.findAll();
         model.addAttribute("users", allUsers);
@@ -28,14 +30,16 @@ public class AdminController {
     }
 
     // Просмотр карточек любого пользователя
-    @GetMapping("/user/{userId}/posts")
+    @GetMapping("/admin/user/{userId}/posts")
     public String viewUserPosts(@PathVariable Long userId, Model model) {
-        User user = userRepository.findById(userId).orElseThrow();
-        model.addAttribute("post", user.getPosts());
-        model.addAttribute("viewedUser", user);
+        User targetUser = userRepository.findById(userId).orElseThrow();
+
+        // Все карточки пользователя
+        model.addAttribute("posts", postRepository.findByUser(targetUser));
+        model.addAttribute("viewedUser", targetUser);
+
         return "admin-user-posts";
     }
-
     // Блокировка пользователя
     @PostMapping("/user/{userId}/block")
     public String blockUser(@PathVariable Long userId) {

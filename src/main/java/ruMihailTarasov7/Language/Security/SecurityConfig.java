@@ -1,5 +1,6 @@
 package ruMihailTarasov7.Language.Security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,18 +22,19 @@ public class SecurityConfig {
     }
 
     @Bean
-    public CommandLineRunner initAdmin(UserRepository userRepo, PasswordEncoder encoder) {
+    public CommandLineRunner initAdmin(UserRepository userRepo, PasswordEncoder encoder,
+                                       @Value("${admin.password:default_pass}") String adminPassword) {
         return args -> {
             if (userRepo.findByUsername("admin") == null) {
                 User admin = new User();
                 admin.setUsername("admin");
-                admin.setPassword(encoder.encode("262614"));
+                admin.setPassword(encoder.encode(adminPassword));  // ← Пароль из переменной!
                 admin.setRole("ADMIN");
                 userRepo.save(admin);
-                System.out.println("=== АДМИН ДЛЯ НАШЕЙ КОМАНДЫ ===");
+
+                System.out.println("=== АДМИН СОЗДАН ===");
                 System.out.println("Логин: admin");
-                System.out.println("Пароль: 262614");
-                System.out.println("Команда: Миша + Дипп = 💪");
+                // Пароль НЕ выводим - он теперь секретный!
             }
         };
     }

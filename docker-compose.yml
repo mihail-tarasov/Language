@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8081:8081"
+    environment:
+      - ADMIN_PASSWORD=262614
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/language
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=0513127Mat
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    environment:
+      - POSTGRES_DB=language
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=0513127Mat
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

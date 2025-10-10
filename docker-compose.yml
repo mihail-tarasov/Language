@@ -6,10 +6,8 @@ services:
       - "8080:8080"
     environment:
       - DB_HOST=db
-      - ADMIN_PASSWORD=262614
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/language
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=0513127Mat
+      - DB_PORT=5432
+      # DB_USERNAME, DB_PASSWORD, ADMIN_PASSWORD - передаются при запуске!
     depends_on:
       - db
 
@@ -17,8 +15,7 @@ services:
     image: postgres:17
     environment:
       - POSTGRES_DB=language
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=0513127Mat
+      # POSTGRES_USER, POSTGRES_PASSWORD - передаются при запуске!
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

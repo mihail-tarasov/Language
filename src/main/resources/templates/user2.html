@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои конспекты</title>
+    <style>
+        /* ===== Базовые сбросы ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Montserrat, cursive;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* ===== Шапка ===== */
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .logo-img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .search-btn {
+            padding: 0.4rem 1rem;
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .search-btn:hover {
+            background-color: #d0d7db;
+        }
+
+        /* ===== Аватар и выпадающее меню ===== */
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .avatar {
+            width: 42px !important;
+            height: 42px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            border: 2px solid #3498db !important;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            display: block !important;
+            flex-shrink: 0 !important;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            border-color: #2980b9;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: white;
+            min-width: 220px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background-color 0.2s;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f5f5f5;
+        }
+
+        .delete-account {
+            color: #e74c3c !important;
+            font-weight: 500;
+        }
+
+        .delete-account:hover {
+            background-color: #fee !important;
+        }
+
+        /* ===== Заголовок страницы ===== */
+        .page-header {
+            max-width: 1200px;
+            margin-left: 0;
+            margin-right: auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            font-weight: 700;
+            text-align: left;
+            margin: 0;
+        }
+
+        /* ===== Основной контейнер ===== */
+        .main-container {
+            max-width: 1200px;
+            margin-left: 0;
+            margin-right: auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+
+        /* Левая колонка — сайдбар */
+        .sidebar {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            min-height: 300px;
+        }
+
+        .sidebar h3 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .subjects-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+
+        .subject-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: #ecf0f1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .subject-item:hover {
+            background: #d0d7db;
+        }
+
+        .subject-name {
+            flex-grow: 1;
+        }
+
+        .delete-subject {
+            color: #e74c3c;
+            font-weight: bold;
+            padding: 0 0.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .delete-subject:hover {
+            color: #c0392b;
+        }
+
+        .profile-actions {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .edit-profile-btn {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+            transition: background-color 0.2s;
+        }
+
+        .edit-profile-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Панель управления предметами */
+        .subject-controls {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f0f3f5;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .subject-controls.show {
+            display: block;
+        }
+
+        .subject-input {
+            width: 100%;
+            padding: 0.6rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .add-subject-btn {
+            width: 100%;
+            padding: 0.6rem;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .add-subject-btn:hover {
+            background-color: #27ae60;
+        }
+
+        /* Правая колонка — карточки */
+        .saved-notes {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .note-card {
+            background: white;
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s, transform 0.2s;
+            border-left: 5px solid #3498db;
+        }
+
+        .note-card:hover {
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .note-card h4 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .note-card p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .note-date {
+            font-size: 0.85rem;
+            color: #95a5a6;
+        }
+
+        /* ===== Футер ===== */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            margin-top: 4rem;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p,
+        .footer-col ul {
+            color: #ecf0f1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: #3498db;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Адаптив ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .navbar-left {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .navbar-right {
+                justify-content: center;
+            }
+
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <a href="site.html" class="logo-link">
+                <img src="logo.png" alt="Конспект" class="logo-img">
+                <span class="logo-text">Конспект</span>
+            </a>
+            <nav class="nav-links">
+                <a href="site.html">Главная</a>
+                <a href="abstract.html">Конспекты</a>
+                <a href="user2.html">Моя</a>
+            </nav>
+        </div>
+        <div class="navbar-right">
+            <button class="search-btn">🔍 Поиск</button>
+            <div class="user-menu">
+                <img src="https://via.placeholder.com/42x42/cccccc/969696?text=Avatar" alt="Аватар" class="avatar" id="avatarBtn">
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="/profile/settings">⚙️ Настройки профиля</a>
+                    <a href="/profile/logout">🚪 Выйти</a>
+                    <a href="/profile/delete" class="delete-account">🗑️ Удалить профиль</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Заголовок страницы -->
+    <div class="page-header">
+        <h1>Мои конспекты</h1>
+    </div>
+
+    <!-- Основной контейнер -->
+    <main class="main-container">
+        
+        <!-- Левый сайдбар -->
+        <aside class="sidebar">
+            <h3>Предметы</h3>
+            <ul class="subjects-list" id="subjectsList">
+                <li class="subject-item" data-subject="Английский">
+                    <span class="subject-name">Английский</span>
+                    <span class="delete-subject" onclick="deleteSubject(this)">✕</span>
+                </li>
+            </ul>
+
+            <!-- Панель управления предметами -->
+            <div class="subject-controls" id="subjectControls">
+                <input type="text" class="subject-input" id="newSubjectInput" placeholder="Название предмета">
+                <button class="add-subject-btn" onclick="addSubject()">+ Добавить предмет</button>
+            </div>
+
+            <div class="profile-actions">
+                <button class="edit-profile-btn" onclick="toggleSubjectControls()">✎ Редактировать</button>
+            </div>
+        </aside>
+
+        <!-- Правая колонка — карточки -->
+        <section class="profile-content">
+            <div class="saved-notes">
+                <div class="note-card">
+                    <h4>Закон Фиттса в интерфейсах</h4>
+                    <p>Время достижения цели зависит от расстояния до цели и её размера. Чем ближе и крупнее — тем быстрее.</p>
+                    <span class="note-date">15 марта 2025</span>
+                </div>
+                <div class="note-card">
+                    <h4>Цветовая психология для UX</h4>
+                    <p>Синий — доверие, зелёный — рост, жёлтый — внимание. Используй осознанно.</p>
+                    <span class="note-date">10 марта 2025</span>
+                </div>
+                <div class="note-card">
+                    <h4>Компоненты в Figma</h4>
+                    <p>Как создавать, переиспользовать и не сойти с ума при правках.</p>
+                    <span class="note-date">5 марта 2025</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>Конспект</h4>
+                <p>Помогаем запоминать сложное простыми словами.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/notes">Конспекты</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <ul>
+                    <li>hello@konspekt.ru</li>
+                    <li>@konspekt</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Конспект. Помогаем запоминать.</p>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script>
+        // Меню аватара
+        document.addEventListener('DOMContentLoaded', function() {
+            const avatar = document.getElementById('avatarBtn');
+            const menu = document.getElementById('dropdownMenu');
+
+            if (avatar && menu) {
+                avatar.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    menu.classList.toggle('show');
+                });
+
+                window.addEventListener('click', function() {
+                    menu.classList.remove('show');
+                });
+
+                menu.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                });
+            }
+
+            // Назначаем обработчики для существующих предметов
+            document.querySelectorAll('.subject-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('delete-subject')) {
+                        const subject = this.dataset.subject;
+                        window.location.href = `list.html?subject=${encodeURIComponent(subject)}`;
+                    }
+                });
+            });
+        });
+
+        // Показать/скрыть панель управления предметами
+        function toggleSubjectControls() {
+            const controls = document.getElementById('subjectControls');
+            controls.classList.toggle('show');
+        }
+
+        // Добавить новый предмет
+        function addSubject() {
+            const input = document.getElementById('newSubjectInput');
+            const subjectName = input.value.trim();
+            
+            if (subjectName === '') {
+                alert('Введите название предмета');
+                return;
+            }
+
+            const subjectsList = document.getElementById('subjectsList');
+            const newItem = document.createElement('li');
+            newItem.className = 'subject-item';
+            newItem.dataset.subject = subjectName;
+            newItem.innerHTML = `
+                <span class="subject-name">${subjectName}</span>
+                <span class="delete-subject" onclick="deleteSubject(this)">✕</span>
+            `;
+
+            // Добавляем обработчик клика на новый элемент
+            newItem.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('delete-subject')) {
+                    const subject = this.dataset.subject;
+                    window.location.href = `list.html?subject=${encodeURIComponent(subject)}`;
+                }
+            });
+
+            subjectsList.appendChild(newItem);
+            input.value = '';
+        }
+
+        // Удалить предмет
+        function deleteSubject(element) {
+            if (confirm('Удалить предмет?')) {
+                const subjectItem = element.closest('.subject-item');
+                subjectItem.remove();
+            }
+        }
+    </script>
+
+</body>
+</html>

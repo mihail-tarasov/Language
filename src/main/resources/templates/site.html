@@ -15,6 +15,7 @@ body {
     font-family: Montserrat, cursive;
     background-color: #f9f9f9;
     color: #333;
+    
 }
 
 /* ===== Навигация ===== */
@@ -25,6 +26,7 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .nav-links {
@@ -155,141 +157,64 @@ body {
     color: #555;
     line-height: 1.6;
 }
+/* ===== Футер ===== */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            margin-top: 4rem;
+            padding: 3rem 2rem 1rem;
+        }
 
-/* ===== Адаптив для телефонов ===== */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: stretch;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
 
-    .nav-links {
-        justify-content: center;
-    }
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
 
-    .navbar-right {
-        justify-content: center;
-    }
+        .footer-col p,
+        .footer-col ul {
+            color: #ecf0f1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
 
-    .hero {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
 
-    .logo-title-group {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
 
-    .articles {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-}
-.footer {
-    background-color: #2c3e50;
-    color: white;
-    margin-top: 4rem;
-    padding: 3rem 2rem 1rem;
-}
+        .footer-col a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
 
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-}
+        .footer-col a:hover {
+            color: #3498db;
+        }
 
-.footer-col h4 {
-    color: white;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-}
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
 
-.footer-col p, .footer-col ul {
-    color: #ecf0f1;
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
-.footer-col ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-col ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-col a {
-    color: #ecf0f1;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.footer-col a:hover {
-    color: #3498db;
-}
-
-.subscribe-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.subscribe-form input {
-    padding: 0.6rem;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.95rem;
-}
-
-.subscribe-form button {
-    padding: 0.6rem;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.subscribe-form button:hover {
-    background-color: #2980b9;
-}
-
-.footer-bottom {
-    max-width: 1200px;
-    margin: 2rem auto 0;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    text-align: center;
-    color: #bdc3c7;
-    font-size: 0.9rem;
-}
-
-.footer-bottom a {
-    color: #bdc3c7;
-    text-decoration: none;
-}
-
-.footer-bottom a:hover {
-    color: white;
-}
-
-@media (max-width: 768px) {
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-}
 </style>
 </head>
 <body>
@@ -323,10 +248,7 @@ body {
 
     <!-- Три блока для статей -->
     <section class="articles">
-        <div class="article-card">
-            <h3>О нас.</h3>
-            <p>Небольшой рассказ о команде разработчиков.</p>
-        </div>
+        
         <div class="article-card">
             <h3>Важное.</h3>
             <p>Правила пользования приложением.</p>
@@ -334,6 +256,10 @@ body {
         <div class="article-card">
             <h3>Подсказки.</h3>
             <p>Описание функционала и помощь в работе.</p>
+        </div>
+        <div class="article-card">
+            <h3>О нас.</h3>
+            <p>Небольшой рассказ о команде разработчиков.</p>
         </div>
     </section>
 

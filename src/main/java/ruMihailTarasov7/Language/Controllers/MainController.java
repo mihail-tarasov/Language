@@ -10,6 +10,6 @@ public class MainController {
     @GetMapping("/")
     public String firstPage(Model model){
         model.addAttribute("title","Добро пожаловать");
-        return "firstPage";
+        return "site";
     }
 }

@@ -21,7 +21,7 @@ public class HomeController {
     public String homePage(Model model){
         Iterable<Post> posts= postRepository.findAll();
         model.addAttribute("posts",posts);
-        return "homePage2";
+        return "user2";
     }
     @GetMapping("/home/blog/add")
     public String blogAdd( Model model){

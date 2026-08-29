@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
     @GetMapping("/")
     public String firstPage(Model model){
-        model.addAttribute("title","Добро пожаловать");
         return "site";
     }
 }

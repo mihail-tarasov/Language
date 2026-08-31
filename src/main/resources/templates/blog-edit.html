@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title> Редактирование статьи </title>
+    <title>Редактирование статьи</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div class="container mt-5" mb-5>
-    <h1>Редактирование статьи </h1>
+<div class="container mt-5">
+    <h1>Редактирование статьи</h1>
     <div th:each="el : ${post}">
-        <form action="/home/blog/add" method="post" >
-            <input type="text" th:value="${el.word}" name="word" placeholder="Введите слова" class="form-control"><br>
-            <input type="text" th:value="${el.translation}" name="translation" placeholder="Введите слова с переводом" class="form-control" ><br>
-            <textarea th:text="${el.full_text}" name="full_text" placeholder="Введите текст со словами" class="form-control" ></textarea><br>
-            <button type="submit" class="btn btn-success">Обновить карточку </button><br>
+        <!-- ИСПРАВИЛ action и method -->
+        <form method="post" th:action="@{'/home/blog/' + ${el.id} + '/edit'}">
+            <!-- ДОБАВИЛ CSRF токен -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
+            <input type="text" th:value="${el.word}" name="word" placeholder="Введите слова" class="form-control"><br>
+            <input type="text" th:value="${el.translation}" name="translation" placeholder="Введите слова с переводом" class="form-control"><br>
+            <textarea name="full_text" placeholder="Введите текст со словами" class="form-control" th:text="${el.full_text}"></textarea><br>
+            <button type="submit" class="btn btn-success">Обновить карточку</button>
         </form>
     </div>
 </div>

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Группы | Конспект</title>
+    <style>
+        /* ===== Базовые сбросы ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Montserrat, cursive;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* ===== Шапка ===== */
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .logo-img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links a.active {
+            opacity: 1;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.2rem;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .search-btn {
+            padding: 0.4rem 1rem;
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .search-btn:hover {
+            background-color: #d0d7db;
+        }
+
+        /* ===== Аватар и выпадающее меню ===== */
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .avatar {
+            width: 42px !important;
+            height: 42px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            border: 2px solid #3498db !important;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            display: block !important;
+            flex-shrink: 0 !important;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            border-color: #2980b9;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: white;
+            min-width: 220px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background-color 0.2s;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f5f5f5;
+        }
+
+        .delete-account {
+            color: #e74c3c !important;
+            font-weight: 500;
+        }
+
+        .delete-account:hover {
+            background-color: #fee !important;
+        }
+
+        /* ===== Заголовок страницы ===== */
+        .page-header {
+            max-width: 1200px;
+            margin-left: 0;
+            margin-right: auto;
+            padding: 2rem 2rem 1rem;
+            width: 100%;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            font-weight: 700;
+            text-align: left;
+            margin: 0;
+        }
+
+        /* ===== Основной контейнер ===== */
+        .groups-container {
+            max-width: 1200px;
+            margin-left: 0;
+            margin-right: auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+        }
+
+        /* Левая колонка — список групп */
+        .groups-sidebar {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            align-self: start;
+        }
+
+        .groups-sidebar h3 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .btn-create {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn-create:hover {
+            background-color: #2980b9;
+        }
+
+        .groups-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .group-item {
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            background: #ecf0f1;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .group-item:hover {
+            background: #d0d7db;
+        }
+
+        .group-item.active {
+            border-left-color: #3498db;
+            background: #d0d7db;
+        }
+
+        .group-name {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .group-meta {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .btn-join {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn-join:hover {
+            background-color: #27ae60;
+        }
+
+        /* Правая колонка — содержимое группы */
+        .group-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .group-content h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .group-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-add-note {
+            padding: 0.5rem 1.2rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-add-note:hover {
+            background-color: #2980b9;
+        }
+
+        .members-section {
+            margin-bottom: 2rem;
+        }
+
+        .members-section h3 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+        }
+
+        .members-list {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .member-badge {
+            padding: 0.3rem 1rem;
+            background: #ecf0f1;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .notes-section h3 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .group-note-card {
+            padding: 1rem;
+            background: #f9f9f9;
+            border-left: 4px solid #3498db;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .group-note-card:hover {
+            transform: translateX(4px);
+        }
+
+        .group-note-card h4 {
+            margin: 0 0 0.3rem 0;
+            color: #2c3e50;
+        }
+
+        .group-note-card p {
+            margin: 0 0 0.5rem 0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .group-note-card .note-date {
+            font-size: 0.8rem;
+            color: #95a5a6;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #7f8c8d;
+        }
+
+        .empty-state p:first-child {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== Футер ===== */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            margin-top: 4rem;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p,
+        .footer-col ul {
+            color: #ecf0f1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: #3498db;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Адаптив ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .navbar-left {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .navbar-right {
+                justify-content: center;
+            }
+
+            .groups-container {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <a href="site.html" class="logo-link">
+                <img src="logo.png" alt="Конспект" class="logo-img">
+                <span class="logo-text">Конспект</span>
+            </a>
+            <nav class="nav-links">
+                <a href="site.html">Главная</a>
+                <a href="abstract.html">Конспекты</a>
+                <a href="user2.html">Моя</a>
+                <a href="kom.html">Группы</a>
+            </nav>
+        </div>
+        <div class="navbar-right">
+            <button class="search-btn">🔍 Поиск</button>
+            <div class="user-menu">
+                <img src="avatar.png" alt="Аватар" class="avatar" id="avatarBtn">
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="/profile/settings">⚙️ Настройки</a>
+                    <a href="/profile/logout">🚪 Выйти</a>
+                    <a href="/profile/delete" class="delete-account">🗑️ Удалить аккаунт</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Заголовок страницы -->
+    <div class="page-header">
+        <h1>Группы</h1>
+    </div>
+
+    <!-- Основной контейнер -->
+    <main class="groups-container">
+        
+        <!-- Левая колонка: список групп -->
+        <aside class="groups-sidebar">
+            <h3>Мои группы</h3>
+
+            <button class="btn-create" onclick="alert('Создать группу')">➕ Создать группу</button>
+
+            <ul class="groups-list">
+                <li class="group-item" onclick="selectGroup(1)">
+                    <span class="group-name">ПБ-41з</span>
+                    <span class="group-meta">4 участника · 12 конспектов</span>
+                </li>
+                <li class="group-item" onclick="selectGroup(2)">
+                    <span class="group-name">UX/UI-дизайн</span>
+                    <span class="group-meta">7 участников · 23 конспекта</span>
+                </li>
+                <li class="group-item" onclick="selectGroup(3)">
+                    <span class="group-name">Робототехника</span>
+                    <span class="group-meta">3 участника · 5 конспектов</span>
+                </li>
+            </ul>
+
+            <button class="btn-join" onclick="alert('Вступить по коду')">🔑 Вступить по коду</button>
+        </aside>
+
+        <!-- Правая колонка: содержимое группы -->
+        <section class="group-content" id="groupContent">
+            <div class="empty-state" id="emptyState">
+                <p>👈 Выберите группу или создайте новую</p>
+                <p>В группах можно делиться конспектами и работать вместе</p>
+            </div>
+
+            <div id="groupDetails" style="display: none;">
+                <div class="group-header">
+                    <h2 id="groupName"></h2>
+                    <button class="btn-add-note" onclick="alert('Добавить конспект в группу')">➕ Добавить конспект</button>
+                </div>
+
+                <div class="members-section">
+                    <h3>Участники</h3>
+                    <div class="members-list" id="membersList"></div>
+                </div>
+
+                <div class="notes-section">
+                    <h3>Конспекты группы</h3>
+                    <div id="notesList"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>Конспект</h4>
+                <p>Помогаем запоминать сложное простыми словами.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="site.html">Главная</a></li>
+                    <li><a href="abstract.html">Конспекты</a></li>
+                    <li><a href="kom.html">Группы</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <ul>
+                    <li>hello@konspekt.ru</li>
+                    <li>@konspekt</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Конспект. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script>
+        // Данные групп (имитация базы данных)
+        const groupsData = {
+            1: {
+                name: 'ПИ-202',
+                members: ['Димон', 'Макс', 'Вероника', 'Ден'],
+                notes: [
+                    { title: 'Лекция 1: Введение', desc: 'Основные понятия программирования', date: '10 марта 2025' },
+                    { title: 'Лекция 2: Методы', desc: 'Подходы и алгоритмы', date: '12 марта 2025' }
+                ]
+            },
+            2: {
+                name: 'UX/UI-дизайн',
+                members: ['Михалыч', 'Михасио', 'Миха', 'Мишка', 'Албэрто',  'МихаилАльбертович'],
+                notes: [
+                    { title: 'Закон Фиттса', desc: 'Время достижения цели зависит от расстояния до цели и её размера', date: '5 марта 2025' },
+                    { title: 'Цвет в интерфейсах', desc: 'Психология восприятия цвета', date: '7 марта 2025' },
+                    { title: 'Типографика', desc: 'Выбор шрифтов и интерлиньяж', date: '9 марта 2025' }
+                ]
+            },
+            3: {
+                name: 'Робототехника',
+                members: ['Михалыч', 'Саняга', 'Илюха'],
+                notes: [
+                    { title: 'Сервоприводы', desc: 'Управление и калибровка сервоприводов', date: '1 марта 2025' },
+                    { title: 'Датчики расстояния', desc: 'Ультразвуковые и инфракрасные датчики', date: '3 марта 2025' }
+                ]
+            }
+        };
+
+        let currentGroupId = null;
+
+        function selectGroup(id) {
+            // Снимаем выделение со всех элементов
+            document.querySelectorAll('.group-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Добавляем выделение текущему
+            const selectedItem = event.currentTarget;
+            selectedItem.classList.add('active');
+
+            // Сохраняем ID текущей группы
+            currentGroupId = id;
+
+            // Показываем детали группы
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('groupDetails').style.display = 'block';
+
+            // Получаем данные группы
+            const group = groupsData[id];
+            if (!group) return;
+
+            // Устанавливаем название группы
+            document.getElementById('groupName').textContent = group.name;
+
+            // Отрисовываем участников
+            const membersList = document.getElementById('membersList');
+            membersList.innerHTML = '';
+            group.members.forEach(member => {
+                const badge = document.createElement('span');
+                badge.className = 'member-badge';
+                badge.textContent = member;
+                membersList.appendChild(badge);
+            });
+
+            // Отрисовываем конспекты
+            const notesList = document.getElementById('notesList');
+            notesList.innerHTML = '';
+            group.notes.forEach(note => {
+                const card = document.createElement('div');
+                card.className = 'group-note-card';
+                card.innerHTML = `
+                    <h4>${note.title}</h4>
+                    <p>${note.desc}</p>
+                    <span class="note-date">${note.date}</span>
+                `;
+                notesList.appendChild(card);
+            });
+        }
+
+        // Выпадающее меню аватара
+        document.addEventListener('DOMContentLoaded', function() {
+            const avatar = document.getElementById('avatarBtn');
+            const menu = document.getElementById('dropdownMenu');
+
+            if (avatar && menu) {
+                avatar.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    menu.classList.toggle('show');
+                });
+
+                window.addEventListener('click', function() {
+                    menu.classList.remove('show');
+                });
+
+                menu.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

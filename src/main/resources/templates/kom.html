@@ -482,222 +482,222 @@
 </head>
 <body>
 
-    <!-- Шапка -->
-    <header class="navbar">
-        <div class="navbar-left">
-            <a href="site.html" class="logo-link">
-                <img src="logo.png" alt="Конспект" class="logo-img">
-                <span class="logo-text">Конспект</span>
-            </a>
-            <nav class="nav-links">
-                <a href="site.html">Главная</a>
-                <a href="abstract.html">Конспекты</a>
-                <a href="user2.html">Моя</a>
-                <a href="kom.html">Группы</a>
-            </nav>
-        </div>
-        <div class="navbar-right">
-            <button class="search-btn">🔍 Поиск</button>
-            <div class="user-menu">
-                <img src="avatar.png" alt="Аватар" class="avatar" id="avatarBtn">
-                <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="/profile/settings">⚙️ Настройки</a>
-                    <a href="/profile/logout">🚪 Выйти</a>
-                    <a href="/profile/delete" class="delete-account">🗑️ Удалить аккаунт</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Заголовок страницы -->
-    <div class="page-header">
-        <h1>Группы</h1>
+<!-- Шапка -->
+<header class="navbar">
+    <div class="navbar-left">
+        <a href="site.html" class="logo-link">
+            <img src="logo.png" alt="Конспект" class="logo-img">
+            <span class="logo-text">Конспект</span>
+        </a>
+        <nav class="nav-links">
+            <a href="site.html">Главная</a>
+            <a href="abstract.html">Конспекты</a>
+            <a href="user2.html">Моя</a>
+            <a href="kom.html">Группы</a>
+        </nav>
     </div>
+    <div class="navbar-right">
+        <button class="search-btn">🔍 Поиск</button>
+        <div class="user-menu">
+            <img src="avatar.png" alt="Аватар" class="avatar" id="avatarBtn">
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="/profile/settings">⚙️ Настройки</a>
+                <a href="/profile/logout">🚪 Выйти</a>
+                <a href="/profile/delete" class="delete-account">🗑️ Удалить аккаунт</a>
+            </div>
+        </div>
+    </div>
+</header>
 
-    <!-- Основной контейнер -->
-    <main class="groups-container">
-        
-        <!-- Левая колонка: список групп -->
-        <aside class="groups-sidebar">
-            <h3>Мои группы</h3>
+<!-- Заголовок страницы -->
+<div class="page-header">
+    <h1>Группы</h1>
+</div>
 
-            <button class="btn-create" onclick="alert('Создать группу')">➕ Создать группу</button>
+<!-- Основной контейнер -->
+<main class="groups-container">
 
-            <ul class="groups-list">
-                <li class="group-item" onclick="selectGroup(1)">
-                    <span class="group-name">ПБ-41з</span>
-                    <span class="group-meta">4 участника · 12 конспектов</span>
-                </li>
-                <li class="group-item" onclick="selectGroup(2)">
-                    <span class="group-name">UX/UI-дизайн</span>
-                    <span class="group-meta">7 участников · 23 конспекта</span>
-                </li>
-                <li class="group-item" onclick="selectGroup(3)">
-                    <span class="group-name">Робототехника</span>
-                    <span class="group-meta">3 участника · 5 конспектов</span>
-                </li>
+    <!-- Левая колонка: список групп -->
+    <aside class="groups-sidebar">
+        <h3>Мои группы</h3>
+
+        <button class="btn-create" onclick="alert('Создать группу')">➕ Создать группу</button>
+
+        <ul class="groups-list">
+            <li class="group-item" onclick="selectGroup(1)">
+                <span class="group-name">ПБ-41з</span>
+                <span class="group-meta">4 участника · 12 конспектов</span>
+            </li>
+            <li class="group-item" onclick="selectGroup(2)">
+                <span class="group-name">UX/UI-дизайн</span>
+                <span class="group-meta">7 участников · 23 конспекта</span>
+            </li>
+            <li class="group-item" onclick="selectGroup(3)">
+                <span class="group-name">Робототехника</span>
+                <span class="group-meta">3 участника · 5 конспектов</span>
+            </li>
+        </ul>
+
+        <button class="btn-join" onclick="alert('Вступить по коду')">🔑 Вступить по коду</button>
+    </aside>
+
+    <!-- Правая колонка: содержимое группы -->
+    <section class="group-content" id="groupContent">
+        <div class="empty-state" id="emptyState">
+            <p>👈 Выберите группу или создайте новую</p>
+            <p>В группах можно делиться конспектами и работать вместе</p>
+        </div>
+
+        <div id="groupDetails" style="display: none;">
+            <div class="group-header">
+                <h2 id="groupName"></h2>
+                <button class="btn-add-note" onclick="alert('Добавить конспект в группу')">➕ Добавить конспект</button>
+            </div>
+
+            <div class="members-section">
+                <h3>Участники</h3>
+                <div class="members-list" id="membersList"></div>
+            </div>
+
+            <div class="notes-section">
+                <h3>Конспекты группы</h3>
+                <div id="notesList"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Футер -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>Конспект</h4>
+            <p>Помогаем запоминать сложное простыми словами.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Разделы</h4>
+            <ul>
+                <li><a href="site.html">Главная</a></li>
+                <li><a href="abstract.html">Конспекты</a></li>
+                <li><a href="kom.html">Группы</a></li>
             </ul>
-
-            <button class="btn-join" onclick="alert('Вступить по коду')">🔑 Вступить по коду</button>
-        </aside>
-
-        <!-- Правая колонка: содержимое группы -->
-        <section class="group-content" id="groupContent">
-            <div class="empty-state" id="emptyState">
-                <p>👈 Выберите группу или создайте новую</p>
-                <p>В группах можно делиться конспектами и работать вместе</p>
-            </div>
-
-            <div id="groupDetails" style="display: none;">
-                <div class="group-header">
-                    <h2 id="groupName"></h2>
-                    <button class="btn-add-note" onclick="alert('Добавить конспект в группу')">➕ Добавить конспект</button>
-                </div>
-
-                <div class="members-section">
-                    <h3>Участники</h3>
-                    <div class="members-list" id="membersList"></div>
-                </div>
-
-                <div class="notes-section">
-                    <h3>Конспекты группы</h3>
-                    <div id="notesList"></div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Футер -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-col">
-                <h4>Конспект</h4>
-                <p>Помогаем запоминать сложное простыми словами.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Разделы</h4>
-                <ul>
-                    <li><a href="site.html">Главная</a></li>
-                    <li><a href="abstract.html">Конспекты</a></li>
-                    <li><a href="kom.html">Группы</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Контакты</h4>
-                <ul>
-                    <li>hello@konspekt.ru</li>
-                    <li>@konspekt</li>
-                </ul>
-            </div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2025 Конспект. Все права защищены.</p>
+        <div class="footer-col">
+            <h4>Контакты</h4>
+            <ul>
+                <li>hello@konspekt.ru</li>
+                <li>@konspekt</li>
+            </ul>
         </div>
-    </footer>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 Конспект. Все права защищены.</p>
+    </div>
+</footer>
 
-    <!-- Скрипты -->
-    <script>
-        // Данные групп (имитация базы данных)
-        const groupsData = {
-            1: {
-                name: 'ПИ-202',
-                members: ['Димон', 'Макс', 'Вероника', 'Ден'],
-                notes: [
-                    { title: 'Лекция 1: Введение', desc: 'Основные понятия программирования', date: '10 марта 2025' },
-                    { title: 'Лекция 2: Методы', desc: 'Подходы и алгоритмы', date: '12 марта 2025' }
-                ]
-            },
-            2: {
-                name: 'UX/UI-дизайн',
-                members: ['Михалыч', 'Михасио', 'Миха', 'Мишка', 'Албэрто',  'МихаилАльбертович'],
-                notes: [
-                    { title: 'Закон Фиттса', desc: 'Время достижения цели зависит от расстояния до цели и её размера', date: '5 марта 2025' },
-                    { title: 'Цвет в интерфейсах', desc: 'Психология восприятия цвета', date: '7 марта 2025' },
-                    { title: 'Типографика', desc: 'Выбор шрифтов и интерлиньяж', date: '9 марта 2025' }
-                ]
-            },
-            3: {
-                name: 'Робототехника',
-                members: ['Михалыч', 'Саняга', 'Илюха'],
-                notes: [
-                    { title: 'Сервоприводы', desc: 'Управление и калибровка сервоприводов', date: '1 марта 2025' },
-                    { title: 'Датчики расстояния', desc: 'Ультразвуковые и инфракрасные датчики', date: '3 марта 2025' }
-                ]
-            }
-        };
+<!-- Скрипты -->
+<script>
+    // Данные групп (имитация базы данных)
+    const groupsData = {
+        1: {
+            name: 'ПИ-202',
+            members: ['Димон', 'Макс', 'Вероника', 'Ден'],
+            notes: [
+                { title: 'Лекция 1: Введение', desc: 'Основные понятия программирования', date: '10 марта 2025' },
+                { title: 'Лекция 2: Методы', desc: 'Подходы и алгоритмы', date: '12 марта 2025' }
+            ]
+        },
+        2: {
+            name: 'UX/UI-дизайн',
+            members: ['Михалыч', 'Михасио', 'Миха', 'Мишка', 'Албэрто',  'МихаилАльбертович'],
+            notes: [
+                { title: 'Закон Фиттса', desc: 'Время достижения цели зависит от расстояния до цели и её размера', date: '5 марта 2025' },
+                { title: 'Цвет в интерфейсах', desc: 'Психология восприятия цвета', date: '7 марта 2025' },
+                { title: 'Типографика', desc: 'Выбор шрифтов и интерлиньяж', date: '9 марта 2025' }
+            ]
+        },
+        3: {
+            name: 'Робототехника',
+            members: ['Михалыч', 'Саняга', 'Илюха'],
+            notes: [
+                { title: 'Сервоприводы', desc: 'Управление и калибровка сервоприводов', date: '1 марта 2025' },
+                { title: 'Датчики расстояния', desc: 'Ультразвуковые и инфракрасные датчики', date: '3 марта 2025' }
+            ]
+        }
+    };
 
-        let currentGroupId = null;
+    let currentGroupId = null;
 
-        function selectGroup(id) {
-            // Снимаем выделение со всех элементов
-            document.querySelectorAll('.group-item').forEach(item => {
-                item.classList.remove('active');
-            });
+    function selectGroup(id) {
+        // Снимаем выделение со всех элементов
+        document.querySelectorAll('.group-item').forEach(item => {
+            item.classList.remove('active');
+        });
 
-            // Добавляем выделение текущему
-            const selectedItem = event.currentTarget;
-            selectedItem.classList.add('active');
+        // Добавляем выделение текущему
+        const selectedItem = event.currentTarget;
+        selectedItem.classList.add('active');
 
-            // Сохраняем ID текущей группы
-            currentGroupId = id;
+        // Сохраняем ID текущей группы
+        currentGroupId = id;
 
-            // Показываем детали группы
-            document.getElementById('emptyState').style.display = 'none';
-            document.getElementById('groupDetails').style.display = 'block';
+        // Показываем детали группы
+        document.getElementById('emptyState').style.display = 'none';
+        document.getElementById('groupDetails').style.display = 'block';
 
-            // Получаем данные группы
-            const group = groupsData[id];
-            if (!group) return;
+        // Получаем данные группы
+        const group = groupsData[id];
+        if (!group) return;
 
-            // Устанавливаем название группы
-            document.getElementById('groupName').textContent = group.name;
+        // Устанавливаем название группы
+        document.getElementById('groupName').textContent = group.name;
 
-            // Отрисовываем участников
-            const membersList = document.getElementById('membersList');
-            membersList.innerHTML = '';
-            group.members.forEach(member => {
-                const badge = document.createElement('span');
-                badge.className = 'member-badge';
-                badge.textContent = member;
-                membersList.appendChild(badge);
-            });
+        // Отрисовываем участников
+        const membersList = document.getElementById('membersList');
+        membersList.innerHTML = '';
+        group.members.forEach(member => {
+            const badge = document.createElement('span');
+            badge.className = 'member-badge';
+            badge.textContent = member;
+            membersList.appendChild(badge);
+        });
 
-            // Отрисовываем конспекты
-            const notesList = document.getElementById('notesList');
-            notesList.innerHTML = '';
-            group.notes.forEach(note => {
-                const card = document.createElement('div');
-                card.className = 'group-note-card';
-                card.innerHTML = `
+        // Отрисовываем конспекты
+        const notesList = document.getElementById('notesList');
+        notesList.innerHTML = '';
+        group.notes.forEach(note => {
+            const card = document.createElement('div');
+            card.className = 'group-note-card';
+            card.innerHTML = `
                     <h4>${note.title}</h4>
                     <p>${note.desc}</p>
                     <span class="note-date">${note.date}</span>
                 `;
-                notesList.appendChild(card);
+            notesList.appendChild(card);
+        });
+    }
+
+    // Выпадающее меню аватара
+    document.addEventListener('DOMContentLoaded', function() {
+        const avatar = document.getElementById('avatarBtn');
+        const menu = document.getElementById('dropdownMenu');
+
+        if (avatar && menu) {
+            avatar.addEventListener('click', function(event) {
+                event.stopPropagation();
+                menu.classList.toggle('show');
+            });
+
+            window.addEventListener('click', function() {
+                menu.classList.remove('show');
+            });
+
+            menu.addEventListener('click', function(event) {
+                event.stopPropagation();
             });
         }
-
-        // Выпадающее меню аватара
-        document.addEventListener('DOMContentLoaded', function() {
-            const avatar = document.getElementById('avatarBtn');
-            const menu = document.getElementById('dropdownMenu');
-
-            if (avatar && menu) {
-                avatar.addEventListener('click', function(event) {
-                    event.stopPropagation();
-                    menu.classList.toggle('show');
-                });
-
-                window.addEventListener('click', function() {
-                    menu.classList.remove('show');
-                });
-
-                menu.addEventListener('click', function(event) {
-                    event.stopPropagation();
-                });
-            }
-        });
-    </script>
+    });
+</script>
 
 </body>
 </html>

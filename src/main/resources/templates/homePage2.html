@@ -25,6 +25,114 @@
 
 
 </div>
+
+<head>
+    <style>
+        .articles {
+                     /* отступы между блоками */
+        }
+        .card {
+            border: 2px solid #6c5ce7;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 400px;
+            margin: 50px auto;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .hidden {
+            display: none;
+        }
+        .word {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+        .translation {
+            font-size: 22px;
+            color: #6c5ce7;
+            margin-top: 15px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background: #6c5ce7;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .articles {
+            display: flex;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: none;
+            margin: 4rem auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+
+
+        }
+        .article-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .article-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .article-card p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="word">hello</div>
+    <div class="translation hidden" id="translation">привет</div>
+    <button onclick="toggleDisplay()">Показать перевод?</button>
+</div>
+<section class="articles">
+
+    <div class="article-card">
+        <h3>Важное.</h3>
+        <p>Правила пользования приложением.</p>
+    </div>
+    <div class="article-card">
+        <h3>Подсказки.</h3>
+        <p>Описание функционала и помощь в работе.</p>
+    </div>
+    <div class="article-card">
+        <h3>О нас.</h3>
+        <p>Небольшой рассказ о команде разработчиков.</p>
+    </div>
+</section>
+<script>
+    function toggleDisplay() {
+        let t = document.getElementById("translation");
+        t.classList.toggle("hidden");
+    }
+</script>
+
+</body>
+
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

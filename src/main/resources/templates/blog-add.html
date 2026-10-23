@@ -7,23 +7,92 @@
 
 </head>
 <body>
-
-
-<div class="container mt-5" mb-5>
-    <h1>Добавление статьи </h1>
-    <form method="post" th:action="@{/home/blog/add}" th:object="${post}">
-        <div>
+   <div class="container mt-5" mb-5>
+       <h1>Добавление статьи </h1>
+       <form method="post" th:action="@{/home/blog/add}" th:object="${post}">
+           <div>
             <input type="text" name="word" placeholder="Введите слова" ><br>
-        </div>
-        <div>
+            </div>
+            <div>
             <input type="text" name="translation" placeholder="Введите слова с переводом" class="form-control"><br>
-        </div>
-        <div>
-            <textarea name="full_text" placeholder="Введите текст" class="form-control"></textarea><br>
-        </div>
-        <button type="submit" class="btn btn-success">Добавить статью</button><br>
-    </form>
+            </div>
+            <div>
+                <textarea name="full_text" placeholder="Введите текст" class="form-control"></textarea><br>
+            </div>
+            <button type="submit" class="btn btn-success">Добавить статью</button><br>
+       </form>
+   </div>
+   <style>
+        .card {
+        border: 2px solid #6c5ce7;
+        border-radius: 15px;
+        padding: 40px;
+        max-width: 400px;
+        margin: 50px auto;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+       }
+       .hidden {
+        display: none;
+       }
+       .word {
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+       }
+       .translation {
+        font-size: 22px;
+        color: #6c5ce7;
+        margin-top: 15px;
+       }
+        button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        background: #6c5ce7;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+       }
+       </style>
+    </head>
+  <body>
+
+<div class="card">
+
+    <button onclick="toggleDisplay()">Показать перевод?</button>
 </div>
+
+<script>
+    function toggleDisplay() {
+        let t = document.getElementById("translation");
+        t.classList.toggle("hidden");
+    }
+</script>
+<!-- Форма -->
+<form method="post" th:action="@{/home/blog/add}" th:object="${post}">
+    <input type="text" name="word" placeholder="Слово">
+    <input type="text" name="translation" placeholder="Перевод">
+    <textarea name="full_text" placeholder="Текст"></textarea>
+    <button type="submit">Добавить</button>
+</form>
+
+<!-- Карточки (если есть данные) -->
+<div th:each="p : ${posts}" class="card">
+    <div class="word" th:text="${p.word}"></div>
+    <div class="translation hidden" th:text="${p.translation}"></div>
+    <button onclick="toggleDisplay(this)">Показать перевод?</button>
+</div>
+
+<script>
+    function toggleDisplay(btn) {
+        let card = btn.closest('.card');
+        let t = card.querySelector('.translation');
+        t.classList.toggle('hidden');
+    }
+</script>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>

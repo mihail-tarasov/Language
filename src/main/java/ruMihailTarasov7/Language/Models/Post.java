@@ -1,12 +1,10 @@
 package ruMihailTarasov7.Language.Models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name="post")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,5 +51,16 @@ public class Post {
         this.word=word;
         this.translation=translation;
         this.full_text=full_text;
+    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

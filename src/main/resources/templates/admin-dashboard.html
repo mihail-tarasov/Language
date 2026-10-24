@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Admin Panel</title>
+</head>
+<body>
+<h1>Панель администратора</h1>
+
+<table>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.username}"></td>
+    <td th:text="${user.enabled} ? 'Активен' : 'Заблокирован'"></td>
+    <td>
+      <a th:href="@{'/admin/user/' + ${user.id} + '/posts'}">Просмотреть карточки</a>
+    </td>
+    <td>
+      <form th:action="@{'/admin/user/' + ${user.id} + '/block'}" method="post" th:if="${user.enabled}">
+        <button type="submit">Заблокировать</button>
+      </form>
+      <form th:action="@{'/admin/user/' + ${user.id} + '/unblock'}" method="post" th:unless="${user.enabled}">
+        <button type="submit">Разблокировать</button>
+      </form>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

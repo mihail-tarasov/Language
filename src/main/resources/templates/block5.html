@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="toggleButton">Переключить класс</button>
+<div id="myElement" class="highlight">Это элемент</div>
+
+<script>
+    const element = document.getElementById('myElement');
+
+    // При нажатии на кнопку класс 'highlight' будет переключаться
+    document.getElementById('toggleButton').addEventListener('click', function() {
+        element.classList.toggle('highlight');
+    });
+</script>
+</body>
+</html>

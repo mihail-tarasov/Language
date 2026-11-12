@@ -5,29 +5,29 @@
     <title>Title</title>
 </head>
 <body>
-<button id="addButton">Нажмите меня</button>
-<button id="dynamicButton" class="highlight">После нажатия,появление предложения</button>
-<button id="dynamicButton2" class="highlight2">Появление перевода</button>
+<div class="card">
+    <button id="addButton">Нажмите меня</button>
+    <button id="dynamicButton" class="highlight">После нажатия,появление предложения</button>
+    <button id="dynamicButton2" class="highlight">Появление перевода</button>
+</div>
 <style>
     .highlight {
         display: none; /* Сначала кнопка не видна  */
     }
-    .highlight2 {
-        display: none;
-    }
+
 </style>
 
 <script>
-    const element = document.getElementById('dynamicButton');
-    const element2 = document.getElementById('dynamicButton2');
+    const sentenceButton = document.getElementById('dynamicButton');
+    const translationButton = document.getElementById('dynamicButton2');
     // Обработчик для первой кнопки
     document.getElementById('addButton').addEventListener('click', function() {
         // Получаем вторую кнопку и показываем её
-        element.classList.toggle('highlight');
+        sentenceButton.classList.toggle('highlight');
     });
     document.getElementById('dynamicButton').addEventListener('click', function() {
         // Получаем вторую кнопку и показываем её
-        element2.classList.toggle('highlight2');
+        translationButton.classList.toggle('highlight');
     });
 </script>
 

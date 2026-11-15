@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="card">
+    <div class="buttons">
+       <button class="btn add-btn">Success</button>
+       <button class="btn sentence-btn highlight">Excellent." The Teacher took another drink of cognac and handed the flask to Remy. "Let's toast our success. The end is near</button>
+       <button class="btn translation-btn highlight"> Отлично! — Учитель отпил еще один глоток коньяку и протянул фляжку Реми. — За наш успех! Конец уже близок.</button>
+    </div>
+</div>
+<div class="card">
+    <div class="buttons">
+        <button class="btn add-btn">Access</button>
+        <button class="btn sentence-btn highlight">And step one is gaining access to the journal on her laptop, where she records her innermost thoughts...</button>
+        <button class="btn translation-btn highlight">И первый шаг - это доступ к дневнику на ее ноуте, где она хранит свои самые сокровенные мысли...</button>
+    </div>
+</div>
+<div class="card">
+    <div class="buttons">
+        <button class="btn add-btn">Нажмите меня</button>
+        <button class="btn sentence-btn highlight">После нажатия, появление предложения</button>
+        <button class="btn translation-btn highlight">Появление перевода</button>
+    </div>
+</div>
+<style>
+
+    .card {
+        border: 2px solid #6c5ce7;
+        border-radius: 15px;
+        padding: 40px;
+        max-width: 500px;
+        margin: 50px auto;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .buttons {
+        display: flex;
+        flex-direction: column;  /* кнопки в столбик */
+        gap: 10px;               /* отступ между кнопками */
+
+    }
+    .btn {
+        border-radius: 5px;
+        background-color: #FFFDD0;
+        color: black;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+   /* .add-btn {
+        border-radius: 5px;
+    }
+    .sentence-btn {
+        border-radius: 5px;
+    }
+    .translation-btn {
+        border-radius: 5px;
+    }
+    */
+    .highlight {
+        display: none; /* Сначала кнопка не видна  */
+    }
+
+</style>
+
+<script>
+
+
+    document.querySelectorAll(".add-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+            this.parentElement.querySelector(".sentence-btn").classList.toggle("highlight");
+        });
+    });
+
+    document.querySelectorAll(".sentence-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+            this.parentElement.querySelector(".translation-btn").classList.toggle("highlight");
+        });
+    });
+
+
+</script>
+
+
+</body>
+</html>

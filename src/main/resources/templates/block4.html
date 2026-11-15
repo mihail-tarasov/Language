@@ -45,24 +45,25 @@
         gap: 10px;               /* отступ между кнопками */
 
     }
+
     .btn {
         border-radius: 5px;
         background-color: #FFFDD0;
         color: black;
-        border: none;
+        border: 2px solid #e7e7e7;
         padding: 10px 15px;
         cursor: pointer;
+        box-shadow: 0 9px #999;
+        transition: background-color 0.2s, box-shadow 0.1s;
     }
-   /* .add-btn {
-        border-radius: 5px;
+
+    .btn:hover {background-color: #FDF6E3}
+
+    .btn:active {
+        box-shadow: 0 4px #666;
+        transform: translateY(4px);
     }
-    .sentence-btn {
-        border-radius: 5px;
-    }
-    .translation-btn {
-        border-radius: 5px;
-    }
-    */
+
     .highlight {
         display: none; /* Сначала кнопка не видна  */
     }

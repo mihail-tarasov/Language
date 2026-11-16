@@ -3,66 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
-<body>
 
-<div class="card">
-    <div class="buttons">
-       <button class="btn add-btn">Success</button>
-       <button class="btn sentence-btn highlight">Excellent." The Teacher took another drink of cognac and handed the flask to Remy. "Let's toast our success. The end is near</button>
-       <button class="btn translation-btn highlight"> Отлично! — Учитель отпил еще один глоток коньяку и протянул фляжку Реми. — За наш успех! Конец уже близок.</button>
-    </div>
-</div>
-<div class="card">
-    <div class="buttons">
-        <button class="btn add-btn">Access</button>
-        <button class="btn sentence-btn highlight">And step one is gaining access to the journal on her laptop, where she records her innermost thoughts...</button>
-        <button class="btn translation-btn highlight">И первый шаг - это доступ к дневнику на ее ноуте, где она хранит свои самые сокровенные мысли...</button>
-    </div>
-</div>
-<div class="card">
-    <div class="buttons">
-        <button class="btn add-btn">Нажмите меня</button>
-        <button class="btn sentence-btn highlight">После нажатия, появление предложения</button>
-        <button class="btn translation-btn highlight">Появление перевода</button>
-    </div>
-</div>
-<style>
+    <style>
+        body {
+            font-family: Montserrat, cursive;
+            background-color: #f9f9f9;
+            color: #333;
+        }
 
-    .card {
-        border: 2px solid #6c5ce7;
-        border-radius: 15px;
-        padding: 40px;
-        max-width: 500px;
-        margin: 50px auto;
-        text-align: center;
-        font-family: Arial, sans-serif;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .buttons {
-        display: flex;
-        flex-direction: column;  /* кнопки в столбик */
-        gap: 10px;               /* отступ между кнопками */
+        /* ===== Навигация ===== */
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
 
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            /* Убираем лишние отступы */
+            margin: 0;
+            padding: 0;
+        }
 
-    .btn {
-        border-radius: 5px;
-        background-color: #FFFDD0;
-        color: black;
-        border: 2px solid #e7e7e7;
-        padding: 10px 15px;
-        cursor: pointer;
-        box-shadow: 0 9px #999;
-        transition: background-color 0.2s, box-shadow 0.1s;
-    }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
 
-    .btn:hover {background-color: #FDF6E3}
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
 
-    .btn:active {
-        box-shadow: 0 4px #666;
-        transform: translateY(4px);
-    }
+        .navbar-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-btn {
+            padding: 0.4rem 1rem;
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .search-btn:hover {
+            background-color: #d0d7db;
+        }
+
+        .login-btn {
+            padding: 0.4rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            background-color: #3498db;
+            color: white;
+            transition: opacity 0.2s;
+        }
+
+        .login-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* ===== Основной блок с выравниванием ===== */
+        .hero {
+            max-width: 1200px;
+        }
+
+        .hero-left {
+            max-width: none;
+        }
+
+        .logo-title-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            /* Убираем возможные отступы у дочерних элементов */
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            display: block; /* убирает лишние отступы у картинок */
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+            margin: 0; /* убираем стандартные отступы h1 */
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #7f8c8d;
+            margin: 0.5rem 0 0 0; /* небольшой отступ сверху */
+        }
+
+        /* свойства карточек */
+        .card {
+            border: 2px solid #6c5ce7;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+            margin: 50px auto;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;  /* кнопки в столбик */
+            gap: 10px;               /* отступ между кнопками */
+
+        }
+
+        .btn {
+            border-radius: 5px;
+            background-color: #FFFDD0;
+            color: black;
+            border: 2px solid #e7e7e7;
+            padding: 10px 15px;
+            cursor: pointer;
+            box-shadow: 0 9px #999;
+            transition: background-color 0.2s, box-shadow 0.1s;
+        }
+
+        .btn:hover {background-color: #FDF6E3}
+
+        .btn:active {
+            box-shadow: 0 4px #666;
+            transform: translateY(4px);
+        }
 
     .highlight {
         display: none; /* Сначала кнопка не видна  */
@@ -89,5 +175,42 @@
 </script>
 
 
+
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>Конспект</h4>
+            <p>Поможем в изучении важного для вас.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Разделы</h4>
+            <ul>
+                <li><a href="site.html">Главная</a></li>
+                <li><a href="abstract.html">Конспекты</a></li>
+                <li><a href="kom.html">Группы</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Связь</h4>
+            <ul>
+                <li>Email: hello@konspekt.ru</li>
+                <li>Telegram: @konspekt</li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Подписка</h4>
+            <form class="subscribe-form">
+                <input type="email" placeholder="ваша почта">
+                <button type="submit">Подписаться</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 Конспект. Все права защищены.</p>
+        <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
+    </div>
+</footer>
 </body>
 </html>

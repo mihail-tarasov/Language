@@ -118,6 +118,15 @@
             text-align: center;
             font-family: Arial, sans-serif;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+             margin-left: 220px;
+}
+@media (max-width: 768px) {
+    .card {
+        margin-left: auto; /* или 0 */
+    }
+    .fixed {
+        display: none; /* скрыть панель на телефоне */
+    }
         }
         .buttons {
             display: flex;
@@ -280,9 +289,9 @@
 <header class="navbar">
     <nav class="nav-links">
         <a href="site.html">Главная</a>
-        <a href="abstract.html">Общие карточки</a>
+        <a href="abstract.html">Конспекты</a>
+        <a href="kom.html">Группы</a>
         <a href="user2.html">Моя</a>
-        <a href="kom.html">Уровни</a>
     </nav>
     <div class="navbar-right">
         <button class="search-btn">🔍 Поиск</button>
